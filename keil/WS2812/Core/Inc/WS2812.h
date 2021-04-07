@@ -39,7 +39,7 @@ void WS2812_parameter(int R,int B,int G,int led_send_number);
 
 
 /*常用颜色宏{R,B,G}*/
-#define LED_colour_black        {0,0,0}         //黑色
+#define LED_colour_black        {0,0,0}        //黑色
 #define LED_colour_white        {255,255,255}   //白色
 #define LED_colour_red          {255,0,0}       //红色
 #define LED_colour_green        {0,255,0}       //绿色

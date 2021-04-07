@@ -14,16 +14,43 @@
 #define N                LED_number*24
 //#define EXT_SDRAM_ADDR  	((uint32_t)0xC0000000)
 //#define EXT_SDRAM_SIZE		(32 * 1024 * 1024)
-uint8_t LED_OUT_test[2]={0,0};
-uint8_t LED_OUT[LED_SET][LED_number][24] __attribute__((at(EXT_SDRAM_ADDR))) ;//定义LED的三维数组[LED组][LED的个数][LED的24个参数]
-/*uint32_t OUT[N]={0,0,
+uint32_t LED_OUT_test[2]={0,0};
+uint32_t LED_OUT[LED_SET][LED_number][24]; //__attribute__((at(EXT_SDRAM_ADDR))) ;//定义LED的三维数组[LED组][LED的个数][LED的24个参数]
+int num =(1*LED_number*24)+4;
+uint32_t LED_DATA[(1*LED_number*24)+4];
+uint32_t OUT1[196]={0,0,
 								39,39,39,39,39,39,39,39,
 								39,39,39,39,39,39,39,39,
 								39,39,39,39,39,39,39,39,
+
 								21,21,21,21,21,21,21,21,
 								21,21,21,21,21,21,21,21,
 								21,21,21,21,21,21,21,21,
-								0,0};*/
+
+								39,39,39,39,39,39,39,39,
+								39,39,39,39,39,39,39,39,
+								39,39,39,39,39,39,39,39,
+
+								21,21,21,21,21,21,21,21,
+								21,21,21,21,21,21,21,21,
+								21,21,21,21,21,21,21,21,
+
+								39,39,39,39,39,39,39,39,
+								39,39,39,39,39,39,39,39,
+								39,39,39,39,39,39,39,39,
+
+								21,21,21,21,21,21,21,21,
+								21,21,21,21,21,21,21,21,
+								21,21,21,21,21,21,21,21,
+
+								39,39,39,39,39,39,39,39,
+								39,39,39,39,39,39,39,39,
+								39,39,39,39,39,39,39,39,
+
+								21,21,21,21,21,21,21,21,
+								21,21,21,21,21,21,21,21,
+								21,21,21,21,21,21,21,21,
+								0,0};
 
 uint8_t RED[8];
 uint8_t BLUE[8];
@@ -56,12 +83,46 @@ struct WS2812_1
   */
 void ws2812_send(int SET)//发送脉冲
 {	
+	/*
+	//HAL_TIM_PWM_Start_DMA(&htim2,TIM_CHANNEL_1,(uint32_t *)OUT1,50);
 	HAL_TIM_PWM_Start_DMA(&htim2,TIM_CHANNEL_1,(uint32_t *)LED_OUT_test,2);//先发两个低信号，稳定DMA
 	for(int i=0;i<LED_number;i++)
 	{  
 		HAL_TIM_PWM_Start_DMA(&htim2,TIM_CHANNEL_1,(uint32_t *)LED_OUT[SET][LED_number],N);
 	}
 	HAL_TIM_PWM_Start_DMA(&htim2,TIM_CHANNEL_1,(uint32_t *)LED_OUT_test,2);
+	*/
+/*
+	LED_DATA[0]=0;
+	LED_DATA[1]=0;
+	LED_DATA[2]=0;
+	LED_DATA[3]=0;
+	LED_DATA[4]=0;
+	LED_DATA[5]=0;
+	LED_DATA[6]=0;
+	LED_DATA[num-1]=0;
+	LED_DATA[num-2]=0;
+	for (int a=7;a<num-2;a++)
+	{
+	LED_DATA[a]=39;
+	}
+*/
+
+	LED_DATA[0]=0;
+	LED_DATA[1]=0;
+	LED_DATA[num-1]=0;
+	LED_DATA[num-2]=0;
+	for (int a=0;a<LED_number;a++)
+	{
+		for (int b=0;b<24;b++)
+	{
+	LED_DATA[2+(a)*24+b]= LED_OUT[SET][a][b];
+	}
+	}
+
+	//HAL_TIM_PWM_Start_DMA(&htim2,TIM_CHANNEL_1,(uint32_t *)LED_DATA,((1*LED_number*24)+3));
+	HAL_TIM_PWM_Start_DMA(&htim2,TIM_CHANNEL_1,(uint32_t *)LED_DATA,195);
+
 }
 
 void HAL_TIM_PWM_PulseFinishedCallback(TIM_HandleTypeDef *htim)// DMA 传输完成回调函数
@@ -90,8 +151,8 @@ void Decimal_TO_Binary(int DATA,int RGB_colour)
 	}
 
 	//创建一个用于while循环的DATA
-	int W_DATA=DATA*(WS2812_1.led_Bri/100);//适配亮度设置
-
+	int W_DATA=(DATA*WS2812_1.led_Bri)/100;//适配亮度设置
+	//int W_DATA=DATA*0.8;
 	int A=8;
 	int B=0;
 	while(!(A==0))
@@ -101,6 +162,10 @@ void Decimal_TO_Binary(int DATA,int RGB_colour)
 		if(B==1)
 		{
 			OUT_DATA[A-1]=WS2812_1.led_PWM_1_Duty_cycle;
+		}
+		else
+		{
+			OUT_DATA[A-1]=WS2812_1.led_PWM_0_Duty_cycle;
 		}
 		W_DATA=W_DATA/2;
 		
@@ -156,10 +221,10 @@ void Decimal_TO_Binary(int DATA,int RGB_colour)
 void LED_Cleared_SET(int SET)
 {
 	//LED位循环
-	for(int number=1;number<LED_number;number++)
+	for(int number=0;number<LED_number;number++)
 	{
 	//LED RBG循环
-	for(int RBG=1;RBG<24;RBG++)
+	for(int RBG=0;RBG<24;RBG++)
 	{
 		LED_OUT[SET][number][RBG]=WS2812_1.led_PWM_0_Duty_cycle;//所有LED值等于零信号参数
 	}
@@ -172,7 +237,7 @@ void LED_Cleared_SET(int SET)
 */
 void WS2812_OLL_slake(void)
 {
-	for(int i=1;i<LED_SET;i++)
+	for(int i=0;i<LED_SET;i++)
 	{
 		LED_Cleared_SET(i);
 	}

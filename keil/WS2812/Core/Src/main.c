@@ -119,6 +119,7 @@ int main(void)
 	printf("SDRAM W9825G6KH初始化成功\r\n");
 
 	WS2812_Init();
+	ws2812_SET_Bri(10);
 	printf("WS2812初始化成功\r\n");
 
 	/*
@@ -142,7 +143,10 @@ int main(void)
 	printf("%d\r\n", OUT1[A]);
 	}	
 	*/
-
+		
+		//int A[3]=LED_colour_red;
+		//WS2812_PUT_SET_LED_colour(0,&A[3]);
+		
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -152,10 +156,16 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-		int A[3]=LED_colour_red;
-		WS2812_PUT_SET_LED_colour(0,&A[3]);
+		int a[3]=LED_colour_black;
+		WS2812_PUT_SET_LED_colour(0,&a[3]);
+		
+		WS2812_PUT_SET_LED(0,255,0,255);
 		ws2812_send_ONE(0);
-		HAL_Delay(1);
+		HAL_Delay(500);
+		WS2812_PUT_SET_LED(0,0,255,0);
+		ws2812_send_ONE(0);
+		HAL_Delay(500);
+		
 		//WS2812_AUTO_send_OFF();
 	/*
   HAL_GPIO_WritePin(LED_R_GPIO_Port, LED_R_Pin, GPIO_PIN_SET);
