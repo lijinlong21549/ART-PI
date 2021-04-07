@@ -130,7 +130,7 @@ int main(void)
 			printf("SDRAM≤‚ ‘ ß∞‹\r\n");
 	}
 	printf("OUT:\r\n");
-
+	
 	for(int c=1;c<33554430;c=c+1)
 	{
 		OUT1[c]=c;

@@ -27,36 +27,11 @@ Project File Date:  04/03/2021
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'E:\Keil5\ARM\ARMCC\Bin'
 Build target 'WS2812'
-compiling main.c...
-../Core/Src/main.c(159): error:  #20: identifier "a" is undefined
-  		WS2812_PUT_SET_LED_colour(0,LED_colour_black);
-../Core/Src/main.c(159): error:  #29: expected an expression
-  		WS2812_PUT_SET_LED_colour(0,LED_colour_black);
-../Core/Src/main.c(116): warning:  #177-D: variable "rh"  was declared but never referenced
-  	uint8_t rh = 11;
-../Core/Src/main.c(264): warning:  #68-D: integer conversion resulted in a change of sign
-          return -1;
-../Core/Src/main.c: 2 warnings, 2 errors
-compiling dma.c...
-compiling usart.c...
-compiling stm32h7xx_hal_msp.c...
-compiling SDRAM.c...
-..\Core\Src\SDRAM.c(114): warning:  #1-D: last line of file ends without a newline
-  //64000/8192*120-20
-..\Core\Src\SDRAM.c: 1 warning, 0 errors
-compiling stm32h7xx_it.c...
-compiling WS2812.c...
-..\Core\Src\WS2812.c(457): warning:  #1-D: last line of file ends without a newline
-  }
-..\Core\Src\WS2812.c: 1 warning, 0 errors
 compiling fmc.c...
-compiling quadspi.c...
-compiling gpio.c...
-compiling tim.c...
-../Core/Src/tim.c(220): warning:  #177-D: variable "led_Hz"  was declared but never referenced
-  	int led_Hz;
-../Core/Src/tim.c: 1 warning, 0 errors
-"WS2812\WS2812.axf" - 2 Error(s), 5 Warning(s).
+linking...
+Program Size: Code=22028 RO-data=744 RW-data=64 ZI-data=14704  
+FromELF: creating hex file...
+"WS2812\WS2812.axf" - 0 Error(s), 0 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -79,8 +54,7 @@ Package Vendor: Keil
 <h2>Collection of Component Files used:</h2>
 
    * Component: ARM::CMSIS:CORE:5.3.0
-Target not created.
-Build Time Elapsed:  00:00:35
+Build Time Elapsed:  00:00:08
 </pre>
 </body>
 </html>

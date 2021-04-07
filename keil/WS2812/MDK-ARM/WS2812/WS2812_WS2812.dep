@@ -2,7 +2,7 @@ Dependencies for Project 'WS2812', Target 'WS2812': (DO NOT MODIFY !)
 CompilerVersion: 5060750::V5.06 update 6 (build 750)::ARMCC
 F (startup_stm32h750xx.s)(0x60671B1E)(--cpu Cortex-M7.fp.dp -g --apcs=interwork --pd "__MICROLIB SETA 1"-I.\RTE\_WS2812-IE:\Keil5pack\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IE:\Keil5pack\Keil\STM32H7xx_DFP\2.7.0\Drivers\CMSIS\Device\ST\STM32H7xx\Include--pd "__UVISION_VERSION SETA 529" --pd "_RTE_ SETA 1" --pd "STM32H750xx SETA 1"--list startup_stm32h750xx.lst --xref -o ws2812\startup_stm32h750xx.o --depend ws2812\startup_stm32h750xx.d)
 F (..\Core\Src\WS2812.c)(0x606D8C7B)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include --C99-I.\RTE\_WS2812-IE:\Keil5pack\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IE:\Keil5pack\Keil\STM32H7xx_DFP\2.7.0\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="529" -D_RTE_ -DSTM32H750xx -DUSE_HAL_DRIVER -DSTM32H750xx-o ws2812\ws2812.o --omf_browse ws2812\ws2812.crf --depend ws2812\ws2812.d)
-I (../Core/Inc/WS2812.h)(0x606D8EF3)
+I (../Core/Inc/WS2812.h)(0x606D9233)
 I (../Core/Inc/main.h)(0x606D8EF3)
 I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h)(0x6040C9C8)
 I (../Core/Inc/stm32h7xx_hal_conf.h)(0x60671B18)
@@ -86,7 +86,7 @@ I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h)(0x6040C9C8)
 I (E:\Keil5\ARM\ARMCC\include\stdio.h)(0x5D9AD21A)
 I (../Core/Inc/SDRAM.h)(0x604F66EF)
 I (../Core/Inc/fmc.h)(0x60671B10)
-F (../Core/Src/main.c)(0x606D8EF3)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include --C99-I.\RTE\_WS2812-IE:\Keil5pack\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IE:\Keil5pack\Keil\STM32H7xx_DFP\2.7.0\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="529" -D_RTE_ -DSTM32H750xx -DUSE_HAL_DRIVER -DSTM32H750xx-o ws2812\main.o --omf_browse ws2812\main.crf --depend ws2812\main.d)
+F (../Core/Src/main.c)(0x606DB3C7)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include --C99-I.\RTE\_WS2812-IE:\Keil5pack\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IE:\Keil5pack\Keil\STM32H7xx_DFP\2.7.0\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="529" -D_RTE_ -DSTM32H750xx -DUSE_HAL_DRIVER -DSTM32H750xx-o ws2812\main.o --omf_browse ws2812\main.crf --depend ws2812\main.d)
 I (../Core/Inc/main.h)(0x606D8EF3)
 I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h)(0x6040C9C8)
 I (../Core/Inc/stm32h7xx_hal_conf.h)(0x60671B18)
@@ -134,7 +134,7 @@ I (E:\Keil5\ARM\ARMCC\include\stdio.h)(0x5D9AD21A)
 I (../Core/Inc/gpio.h)(0x60671B0C)
 I (../Core/Inc/fmc.h)(0x60671B10)
 I (../Core/Inc/SDRAM.h)(0x604F66EF)
-I (../Core/Inc/WS2812.h)(0x606D8EF3)
+I (../Core/Inc/WS2812.h)(0x606D9233)
 F (../Core/Src/gpio.c)(0x60671B0B)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include --C99-I.\RTE\_WS2812-IE:\Keil5pack\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IE:\Keil5pack\Keil\STM32H7xx_DFP\2.7.0\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="529" -D_RTE_ -DSTM32H750xx -DUSE_HAL_DRIVER -DSTM32H750xx-o ws2812\gpio.o --omf_browse ws2812\gpio.crf --depend ws2812\gpio.d)
 I (../Core/Inc/gpio.h)(0x60671B0C)
 I (../Core/Inc/main.h)(0x606D8EF3)
@@ -217,7 +217,7 @@ I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim.h)(0x6040C9C8)
 I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim_ex.h)(0x6040C9C8)
 I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h)(0x6040C9C8)
 I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h)(0x6040C9C8)
-F (../Core/Src/fmc.c)(0x60671B10)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include --C99-I.\RTE\_WS2812-IE:\Keil5pack\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IE:\Keil5pack\Keil\STM32H7xx_DFP\2.7.0\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="529" -D_RTE_ -DSTM32H750xx -DUSE_HAL_DRIVER -DSTM32H750xx-o ws2812\fmc.o --omf_browse ws2812\fmc.crf --depend ws2812\fmc.d)
+F (../Core/Src/fmc.c)(0x606DB45A)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include --C99-I.\RTE\_WS2812-IE:\Keil5pack\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IE:\Keil5pack\Keil\STM32H7xx_DFP\2.7.0\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="529" -D_RTE_ -DSTM32H750xx -DUSE_HAL_DRIVER -DSTM32H750xx-o ws2812\fmc.o --omf_browse ws2812\fmc.crf --depend ws2812\fmc.d)
 I (../Core/Inc/fmc.h)(0x60671B10)
 I (../Core/Inc/main.h)(0x606D8EF3)
 I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h)(0x6040C9C8)
@@ -340,7 +340,7 @@ I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim.h)(0x6040C9C8)
 I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_tim_ex.h)(0x6040C9C8)
 I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h)(0x6040C9C8)
 I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h)(0x6040C9C8)
-I (../Core/Inc/WS2812.h)(0x606D8EF3)
+I (../Core/Inc/WS2812.h)(0x606D9233)
 F (../Core/Src/usart.c)(0x60671B14)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include --C99-I.\RTE\_WS2812-IE:\Keil5pack\ARM\CMSIS\5.6.0\CMSIS\Core\Include-IE:\Keil5pack\Keil\STM32H7xx_DFP\2.7.0\Drivers\CMSIS\Device\ST\STM32H7xx\Include-D__UVISION_VERSION="529" -D_RTE_ -DSTM32H750xx -DUSE_HAL_DRIVER -DSTM32H750xx-o ws2812\usart.o --omf_browse ws2812\usart.crf --depend ws2812\usart.d)
 I (../Core/Inc/usart.h)(0x60671B14)
 I (../Core/Inc/main.h)(0x606D8EF3)
