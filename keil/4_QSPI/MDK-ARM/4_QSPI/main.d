@@ -46,4 +46,5 @@
 4_qspi\main.o: ../Core/Inc/gpio.h
 4_qspi\main.o: ../Core/Inc/fmc.h
 4_qspi\main.o: ../Core/Inc/SDRAM.h
-4_qspi\main.o: ../Core/Inc/W25Q64.h
+4_qspi\main.o: ../Core/Inc/W25Q128.h
+4_qspi\main.o: ../Core/Inc/W25Q64_QSPI.h

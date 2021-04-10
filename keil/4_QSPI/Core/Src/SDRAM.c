@@ -112,3 +112,116 @@ void SDRAM_Init(void)
   HAL_SDRAM_ProgramRefreshRate(&hsdram1, REFRESH_COUNT); 
 }
 //64000/8192*120-20
+
+uint8_t SDRAM_SendCommand(uint32_t CommandMode, uint32_t Bank, uint32_t RefreshNum, uint32_t RegVal)
+{
+    uint32_t CommandTarget;
+    FMC_SDRAM_CommandTypeDef Command;
+    
+    if (Bank == 1) {
+        CommandTarget = FMC_SDRAM_CMD_TARGET_BANK1;
+    } else if (Bank == 2) {
+        CommandTarget = FMC_SDRAM_CMD_TARGET_BANK2;
+    }
+    
+    Command.CommandMode = CommandMode;
+    Command.CommandTarget = CommandTarget;
+    Command.AutoRefreshNumber = RefreshNum;
+    Command.ModeRegisterDefinition = RegVal;
+    
+    if (HAL_SDRAM_SendCommand(&hsdram1, &Command, 0x1000) != HAL_OK) {
+        return -1;
+    }
+    
+    return 0;
+}
+
+uint32_t bsp_TestExtSDRAM(void)
+{
+	uint32_t i;
+	uint32_t *pSRAM;
+	uint8_t *pBytes;
+	uint32_t err;
+	const uint8_t ByteBuf[4] = {0x55, 0xA5, 0x5A, 0xAA};
+
+	/* 写SDRAM */
+	pSRAM = (uint32_t *)EXT_SDRAM_ADDR;
+	for (i = 0; i < EXT_SDRAM_SIZE / 4; i++)
+	{
+		*pSRAM++ = i;
+	}
+
+	/* 读SDRAM */
+	err = 0;
+	pSRAM = (uint32_t *)EXT_SDRAM_ADDR;
+	for (i = 0; i < EXT_SDRAM_SIZE / 4; i++)
+	{
+		if (*pSRAM++ != i)
+		{
+			err++;
+		}
+	}
+
+	if (err >  0)
+	{
+		printf("错误");
+		return  (4 * err);
+	}
+
+	/* 对SDRAM 的数据求反并写入 */
+	pSRAM = (uint32_t *)EXT_SDRAM_ADDR;
+	for (i = 0; i < EXT_SDRAM_SIZE / 4; i++)
+	{
+		*pSRAM = ~*pSRAM;
+		pSRAM++;
+	}
+
+
+	err = 0;
+	pSRAM = (uint32_t *)EXT_SDRAM_ADDR;
+	for (i = 0; i < EXT_SDRAM_SIZE / 4; i++)
+	{
+		if (*pSRAM++ != (~i))
+		{
+			err++;
+		}
+	}
+
+	if (err >  0)
+	{
+		printf("错误");
+		return (4 * err);
+	}
+	/* 测试按字节方式访问, 目的是验证 FSMC_NBL0 、 FSMC_NBL1 口线 */
+	pBytes = (uint8_t *)EXT_SDRAM_ADDR;
+	for (i = 0; i < sizeof(ByteBuf); i++)
+	{
+		*pBytes++ = ByteBuf[i];
+	}
+
+	/* 比较SDRAM的数据 */
+	err = 0;
+	pBytes = (uint8_t *)EXT_SDRAM_ADDR;
+	for (i = 0; i < sizeof(ByteBuf); i++)
+	{
+		if (*pBytes++ != ByteBuf[i])
+		{
+			err++;
+		}
+	}
+	if (err >  0)
+	{
+		printf("错误");
+		return err;
+	}
+	return 0;
+}
+
+void SDRAM_test(void)
+	{
+	if (bsp_TestExtSDRAM() == 0) {
+			printf("SDRAM测试成功\r\n");
+	} else {
+			printf("SDRAM测试失败\r\n");
+	}
+	}

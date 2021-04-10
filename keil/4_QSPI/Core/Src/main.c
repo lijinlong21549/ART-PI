@@ -29,14 +29,12 @@
 /* USER CODE BEGIN Includes */
 #include "stdio.h"
 #include "SDRAM.h"
-#include "W25Q64.h"
+#include "W25Q128.h"
+#include "W25Q64_QSPI.h"
 
 
 
 uint32_t bsp_TestExtSDRAM(void);
-
-//uint8_t testValue __attribute__((at(EXT_SDRAM_ADDR)));
-uint8_t OUT1[33554432] __attribute__((at(EXT_SDRAM_ADDR)));//SDRAM测试函数变量
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -106,7 +104,7 @@ int main(void)
 
 	SDRAM_Init();
 	printf("SDRAM W9825G6KH初始化成功\r\n");
-	/*
+	
 	W25Qx_Init();
 	printf("SPI-Flash初始化成功\r\n");
 
@@ -118,33 +116,22 @@ int main(void)
 	printf("取出数据：");
 	W25Qx_Read(pDATA,0*00,6);
 	printf("%s\r\n",pDATA);
-	*/
 
-/*
+	
+
 	//SDRAM测试
-	if (bsp_TestExtSDRAM() == 0) {
-			printf("SDRAM测试成功\r\n");
-	} else {
-			printf("SDRAM测试失败\r\n");
-	}
+	//SDRAM_test();
 
-	printf("OUT:\r\n");
-
-	for(int c=1;c<33554430;c=c+1)
-	{
-		OUT1[c]=c;
-		//HAL_Delay(1);
-	}
-
-	for(int A=1;A<500;A=A+1)
-	{
-	//printf("OUT:");
-	printf("%d\r\n", OUT1[A]);
-	}	
-	*/
-		//int A[3]=LED_colour_red;
-		//WS2812_PUT_SET_LED_colour(0,&A[3]);
-		
+	W25Qx_QSPI_Init();
+/*
+	uint8_t temp1[50] = "hello sudaroot";
+	uint8_t temp2[50] = {0};
+	W25Qx_QSPI_Erase_Block(0);
+  W25Qx_QSPI_Write(temp1, 0, 15);
+  W25Qx_QSPI_Read(temp2, 0, 15);
+	printf("1: %s\r\n", temp1);
+	printf("2: %s\r\n", temp2);
+*/
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -235,109 +222,7 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
-uint8_t SDRAM_SendCommand(uint32_t CommandMode, uint32_t Bank, uint32_t RefreshNum, uint32_t RegVal)
-{
-    uint32_t CommandTarget;
-    FMC_SDRAM_CommandTypeDef Command;
-    
-    if (Bank == 1) {
-        CommandTarget = FMC_SDRAM_CMD_TARGET_BANK1;
-    } else if (Bank == 2) {
-        CommandTarget = FMC_SDRAM_CMD_TARGET_BANK2;
-    }
-    
-    Command.CommandMode = CommandMode;
-    Command.CommandTarget = CommandTarget;
-    Command.AutoRefreshNumber = RefreshNum;
-    Command.ModeRegisterDefinition = RegVal;
-    
-    if (HAL_SDRAM_SendCommand(&hsdram1, &Command, 0x1000) != HAL_OK) {
-        return -1;
-    }
-    
-    return 0;
-}
 
-uint32_t bsp_TestExtSDRAM(void)
-{
-	uint32_t i;
-	uint32_t *pSRAM;
-	uint8_t *pBytes;
-	uint32_t err;
-	const uint8_t ByteBuf[4] = {0x55, 0xA5, 0x5A, 0xAA};
-
-	/* 写SDRAM */
-	pSRAM = (uint32_t *)EXT_SDRAM_ADDR;
-	for (i = 0; i < EXT_SDRAM_SIZE / 4; i++)
-	{
-		*pSRAM++ = i;
-	}
-
-	/* 读SDRAM */
-	err = 0;
-	pSRAM = (uint32_t *)EXT_SDRAM_ADDR;
-	for (i = 0; i < EXT_SDRAM_SIZE / 4; i++)
-	{
-		if (*pSRAM++ != i)
-		{
-			err++;
-		}
-	}
-
-	if (err >  0)
-	{
-		printf("错误");
-		return  (4 * err);
-	}
-
-	/* 对SDRAM 的数据求反并写入 */
-	pSRAM = (uint32_t *)EXT_SDRAM_ADDR;
-	for (i = 0; i < EXT_SDRAM_SIZE / 4; i++)
-	{
-		*pSRAM = ~*pSRAM;
-		pSRAM++;
-	}
-
-
-	err = 0;
-	pSRAM = (uint32_t *)EXT_SDRAM_ADDR;
-	for (i = 0; i < EXT_SDRAM_SIZE / 4; i++)
-	{
-		if (*pSRAM++ != (~i))
-		{
-			err++;
-		}
-	}
-
-	if (err >  0)
-	{
-		printf("错误");
-		return (4 * err);
-	}
-	/* 测试按字节方式访问, 目的是验证 FSMC_NBL0 、 FSMC_NBL1 口线 */
-	pBytes = (uint8_t *)EXT_SDRAM_ADDR;
-	for (i = 0; i < sizeof(ByteBuf); i++)
-	{
-		*pBytes++ = ByteBuf[i];
-	}
-
-	/* 比较SDRAM的数据 */
-	err = 0;
-	pBytes = (uint8_t *)EXT_SDRAM_ADDR;
-	for (i = 0; i < sizeof(ByteBuf); i++)
-	{
-		if (*pBytes++ != ByteBuf[i])
-		{
-			err++;
-		}
-	}
-	if (err >  0)
-	{
-		printf("错误");
-		return err;
-	}
-	return 0;
-}
 /* USER CODE END 4 */
 
 /**

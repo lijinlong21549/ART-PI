@@ -1,5 +1,5 @@
-#ifndef __W25Q64_H__
-#define __W25Q64_H__
+#ifndef __W25Q128_H__
+#define __W25Q128_H__
 
 #ifdef __cplusplus
 extern "C" {
@@ -9,7 +9,7 @@ extern "C" {
 #include "main.h"
 
 #include "stdio.h"
-#include "W25Q64.h"
+#include "W25Q128.h"
 
 #define delay(ms) osDelay(ms)
 #define get_tick() HAL_GetTick()
@@ -345,4 +345,4 @@ uint8_t W25Qx_Erase_Chip(void)
 }
 #endif
 
-#endif /* __W25Q64_H__ */
+#endif /* __W25Q128_H__ */

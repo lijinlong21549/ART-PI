@@ -1,7 +1,6 @@
 --cpu Cortex-M7.fp.dp
 "4_qspi\startup_stm32h750xx.o"
 "4_qspi\sdram.o"
-"4_qspi\w25q64.o"
 "4_qspi\main.o"
 "4_qspi\gpio.o"
 "4_qspi\fmc.o"
@@ -10,6 +9,8 @@
 "4_qspi\usart.o"
 "4_qspi\stm32h7xx_it.o"
 "4_qspi\stm32h7xx_hal_msp.o"
+"4_qspi\w25q128.o"
+"4_qspi\w25q64_qspi.o"
 "4_qspi\stm32h7xx_hal_cortex.o"
 "4_qspi\stm32h7xx_hal_rcc.o"
 "4_qspi\stm32h7xx_hal_rcc_ex.o"
