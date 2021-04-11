@@ -24,5 +24,6 @@
 #define SDRAM_MODEREG_WRITEBURST_MODE_SINGLE     ((uint16_t)0x0200)
 
 void SDRAM_Init(void);
+void SDRAM_test(void);
 //void SDRAM_SendCommand(uint32_t CommandMode, uint32_t Bank, uint32_t RefreshNum, uint32_t RegVal);
 #endif /* _SDRAM__H_ */

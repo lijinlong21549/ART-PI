@@ -120,7 +120,7 @@ int main(void)
 	
 
 	//SDRAM≤‚ ‘
-	//SDRAM_test();
+	SDRAM_test();
 
 	W25Qx_QSPI_Init();
 /*
