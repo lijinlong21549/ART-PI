@@ -48,3 +48,4 @@ tft\main.o: ../Core/Inc/fmc.h
 tft\main.o: ../Core/Inc/SDRAM.h
 tft\main.o: ../Core/Inc/W25Q128.h
 tft\main.o: ../Core/Inc/W25Q64_QSPI.h
+tft\main.o: ../Core/Inc/ILI9488.h

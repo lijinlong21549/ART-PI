@@ -11,6 +11,7 @@
 "tft\w25q64_qspi.o"
 "tft\w25q128.o"
 "tft\sdram.o"
+"tft\ili9488.o"
 "tft\stm32h7xx_hal_cortex.o"
 "tft\stm32h7xx_hal_rcc.o"
 "tft\stm32h7xx_hal_rcc_ex.o"

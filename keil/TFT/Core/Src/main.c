@@ -31,7 +31,7 @@
 #include "SDRAM.h"
 #include "W25Q128.h"
 #include "W25Q64_QSPI.h"
-
+#include "ILI9488.h"
 
 
 uint32_t bsp_TestExtSDRAM(void);
@@ -103,55 +103,56 @@ int main(void)
   MX_SPI2_Init();
   /* USER CODE BEGIN 2 */
 
-	SDRAM_Init();
-	printf("SDRAM W9825G6KH初始化成功\r\n");
-	
-	W25Qx_Init();
-	printf("SPI-Flash初始化成功\r\n");
+  SDRAM_Init();
+  printf("SDRAM W9825G6KH初始化成功\r\n");
 
-	printf("存储数据：W25Q64 \r\n");
-	uint8_t DATA[6]="W25Q64";
-	uint8_t pDATA[6];
-	W25Qx_Write(DATA,0*00, 6);
-	//W25Qx_Erase_Block(0*00);
-	printf("取出数据：");
-	W25Qx_Read(pDATA,0*00,6);
-	printf("%s\r\n",pDATA);
+  W25Qx_Init();
+  printf("SPI-Flash初始化成功\r\n");
 
-	
+  printf("存储数据：W25Q64 \r\n");
+  uint8_t DATA[6]="W25Q64";
+  uint8_t pDATA[6];
+  W25Qx_Write(DATA,0*00, 6);
+  //W25Qx_Erase_Block(0*00);
+  printf("取出数据：");
+  W25Qx_Read(pDATA,0*00,6);
+  printf("%s\r\n",pDATA);
 
-	//SDRAM测试
-	SDRAM_test();
+  //SDRAM测试
+  //SDRAM_test();
 
-	W25Qx_QSPI_Init();
-/*
-	uint8_t temp1[50] = "hello sudaroot";
-	uint8_t temp2[50] = {0};
-	W25Qx_QSPI_Erase_Block(0);
-  W25Qx_QSPI_Write(temp1, 0, 15);
-  W25Qx_QSPI_Read(temp2, 0, 15);
-	printf("1: %s\r\n", temp1);
-	printf("2: %s\r\n", temp2);
-*/
+  W25Qx_QSPI_Init();
+  LCD_Init();
+  /*
+  	uint8_t temp1[50] = "hello sudaroot";
+  	uint8_t temp2[50] = {0};
+  	W25Qx_QSPI_Erase_Block(0);
+    W25Qx_QSPI_Write(temp1, 0, 15);
+    W25Qx_QSPI_Read(temp2, 0, 15);
+  	printf("1: %s\r\n", temp1);
+  	printf("2: %s\r\n", temp2);
+
+
+  */
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
-  {
-    /* USER CODE END WHILE */
+    {
+      /* USER CODE END WHILE */
 
-    /* USER CODE BEGIN 3 */
+      /* USER CODE BEGIN 3 */
 
-		
 
-  HAL_GPIO_WritePin(LED_R_GPIO_Port, LED_R_Pin, GPIO_PIN_SET);
-  HAL_GPIO_WritePin(LED_B_GPIO_Port, LED_B_Pin, GPIO_PIN_SET);
-	HAL_Delay(500);
-  HAL_GPIO_WritePin(LED_R_GPIO_Port, LED_R_Pin, GPIO_PIN_RESET);
-  HAL_GPIO_WritePin(LED_B_GPIO_Port, LED_B_Pin, GPIO_PIN_RESET);
-	HAL_Delay(500);
-  }
+
+      HAL_GPIO_WritePin(LED_R_GPIO_Port, LED_R_Pin, GPIO_PIN_SET);
+      HAL_GPIO_WritePin(LED_B_GPIO_Port, LED_B_Pin, GPIO_PIN_SET);
+      HAL_Delay(500);
+      HAL_GPIO_WritePin(LED_R_GPIO_Port, LED_R_Pin, GPIO_PIN_RESET);
+      HAL_GPIO_WritePin(LED_B_GPIO_Port, LED_B_Pin, GPIO_PIN_RESET);
+      HAL_Delay(500);
+    }
   /* USER CODE END 3 */
 }
 
@@ -190,14 +191,14 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.PLL.PLLVCOSEL = RCC_PLL1VCOWIDE;
   RCC_OscInitStruct.PLL.PLLFRACN = 0;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
-  {
-    Error_Handler();
-  }
+    {
+      Error_Handler();
+    }
   /** Initializes the CPU, AHB and APB buses clocks
   */
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
-                              |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2
-                              |RCC_CLOCKTYPE_D3PCLK1|RCC_CLOCKTYPE_D1PCLK1;
+                                |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2
+                                |RCC_CLOCKTYPE_D3PCLK1|RCC_CLOCKTYPE_D1PCLK1;
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.SYSCLKDivider = RCC_SYSCLK_DIV1;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_HCLK_DIV2;
@@ -207,20 +208,20 @@ void SystemClock_Config(void)
   RCC_ClkInitStruct.APB4CLKDivider = RCC_APB4_DIV2;
 
   if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_4) != HAL_OK)
-  {
-    Error_Handler();
-  }
+    {
+      Error_Handler();
+    }
   PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_UART4|RCC_PERIPHCLK_SPI1
-                              |RCC_PERIPHCLK_SPI2|RCC_PERIPHCLK_QSPI
-                              |RCC_PERIPHCLK_FMC;
+      |RCC_PERIPHCLK_SPI2|RCC_PERIPHCLK_QSPI
+      |RCC_PERIPHCLK_FMC;
   PeriphClkInitStruct.FmcClockSelection = RCC_FMCCLKSOURCE_D1HCLK;
   PeriphClkInitStruct.QspiClockSelection = RCC_QSPICLKSOURCE_D1HCLK;
   PeriphClkInitStruct.Spi123ClockSelection = RCC_SPI123CLKSOURCE_PLL;
   PeriphClkInitStruct.Usart234578ClockSelection = RCC_USART234578CLKSOURCE_D2PCLK1;
   if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK)
-  {
-    Error_Handler();
-  }
+    {
+      Error_Handler();
+    }
 }
 
 /* USER CODE BEGIN 4 */
@@ -237,8 +238,8 @@ void Error_Handler(void)
   /* User can add his own implementation to report the HAL error return state */
   __disable_irq();
   while (1)
-  {
-  }
+    {
+    }
   /* USER CODE END Error_Handler_Debug */
 }
 

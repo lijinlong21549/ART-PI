@@ -447,6 +447,11 @@
               <FileType>1</FileType>
               <FilePath>..\Core\Src\SDRAM.c</FilePath>
             </File>
+            <File>
+              <FileName>ILI9488.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Core\Src\ILI9488.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
