@@ -11,6 +11,9 @@
 
 #include "main.h"
 #include "spi.h"
+/*常用常数定义*/
+#define ILI9488_TIMEOUT_VALUE 1000    //SPI发送超时
+
 /*引脚操作宏定义*/
 //LCD_SPI片选
 #define LCD_CS_HIGH() HAL_GPIO_WritePin(LCD_CS_GPIO_Port, LCD_CS_Pin, GPIO_PIN_RESET)
@@ -56,7 +59,7 @@
 #define LCD_Vertical_Scrolling_Definition 0x33                            //垂直滚动定义
 #define LCD_Tearing_Effect_Line_OFF 0x34                                  //撕裂效果线关闭
 #define LCD_Tearing_Effect_Line_ON 0x35                                   //撕裂效果线打开
-#define LCD_Memory Access Control 0x36                                    //内存访问控制
+#define LCD_Memory_Access_Control 0x36                                    //内存访问控制
 #define LCD_Vertical_Scrolling_Start_Address 0x37                         //垂直滚动开始地址
 #define LCD_Idle_Mode_OFF 0x38                                            //空闲模式关闭
 #define LCD_Idle_Mode_ON 0x39                                             //空闲模式开启
@@ -111,7 +114,7 @@
 #define LCD_Read_ID4 0xD3                                                 //读取ID4
 #define LCD_Adjust_Control_1 0xD7                                         //调整控件1
 #define LCD_PGAMCTRL_Positive_Gamma_Control 0xE0                          //PGAMCTRL(正伽马控制)
-#define LCD_NGAMCTRL_Negative_Gamma Control 0xE1                          //PGAMCTRL(负伽马控制)
+#define LCD_NGAMCTRL_Negative_Gamma_Control 0xE1                          //PGAMCTRL(负伽马控制)
 #define LCD_Ditigal_Gamma_Control_1 0xE2                                  //数字伽马控制1
 #define LCD_Ditigal_Gamma_Control_2 0xE3                                  //数字伽马控制2
 #define LCD_Set_Image_Function 0xE9                                       //设定影像功能
